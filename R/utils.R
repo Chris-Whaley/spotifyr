@@ -50,11 +50,15 @@ verify_result <- function(res) {
 #' @importFrom rvest html_text html_elements
 
 scopes <- function() {
-    xml2::read_html("https://developer.spotify.com/documentation/web-api/concepts/scopes") %>%
-    rvest::html_elements('code') %>%
-    rvest::html_text() %>%
-    unique()
-    }
+    valid_scopes <- xml2::read_html("https://developer.spotify.com/documentation/web-api/concepts/scopes") %>%
+        rvest::html_elements('code') %>%
+        rvest::html_text() %>%
+        unique()
+
+    valid_scopes <- valid_scopes[c(7,8,9,10,14,15)]
+
+    valid_scopes
+}
 
 #' Remove duplicate album names
 #'
